@@ -2,7 +2,4 @@
 Recipes_Project
 Test
 
-
-
-
-hello
+This is a test of git
