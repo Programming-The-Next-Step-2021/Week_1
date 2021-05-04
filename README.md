@@ -1,4 +1,4 @@
-# Week_1
+# Recipes Project
 Recipes_Project
 Test
 
