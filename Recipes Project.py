@@ -5,8 +5,11 @@ api = sp.API("15f1634e59b646a2b48daa73b56b86af")
 #all api functions found at link below
 # https://spoonacular.com/food-api/docs
 # Todo: add argument & choice to not have pantry items
-ingredients = input(__prompt= 'What are the ingredients you'd like to use?')
+#Todo: store all in one function?
+
+ingredients = input('What are the ingredients youd like to use?')
 response = api.search_recipes_by_ingredients(ingredients, ranking=2)
+#ignore typical pantry items: ignorePantry=True
 data = response.json()
 recipeList = []
 recipeID = []
@@ -29,7 +32,10 @@ recipeChoice = recipeID[chosen]
 
 moreresponse = api.get_recipe_information(recipeChoice)
 moredata = moreresponse.json()
-print(moredata['sourceUrl'])
+#open recipe URL
+import webbrowser
+webbrowser.open((moredata['sourceUrl']))
+
 
 
 
