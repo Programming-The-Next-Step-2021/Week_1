@@ -1,11 +1,44 @@
 import spoonacular as sp
+import PySimpleGUI as sg
+import webbrowser as wb
 api = sp.API("15f1634e59b646a2b48daa73b56b86af")
 
-# Search recipe by ingredients
 #all api functions found at link below
 # https://spoonacular.com/food-api/docs
 # Todo: add argument & choice to not have pantry items
-#Todo: store all in one function?
+
+def main_window():
+    '''
+    This function will display a window in which the user specifies the ingredients they wish to find a recipe for.
+    :return:
+    '''
+
+
+    #Layout
+    layout_window = [
+            [sg.Text('What ingredients would you like to use? (please separate with a comma):')],
+            [sg.InputText()],
+            [sg.Button('Ok'), sg.Button('Cancel')],
+            [sg.Listbox([],size = (40,20), auto_size_text=True, key='-OUTPUT-')],
+            [sg.Button('Open Recipe Link')]
+            ]
+    window = sg.Window('Find recipes with what\'s in your kitchen!', layout_window)
+
+    #Intialize ingredients list
+    ingredients = []
+
+
+    #Main window loop
+    while True:
+        event, values = window.read()
+        if event == sg.WIN_CLOSED or event == 'Cancel':
+            break
+        elif event == 'Ok': #If Ok clicked create list with ingredients entered
+            ingredients = values[0].split(',')
+            recipes_dict = get_recipes(ingredients)
+            window['-OUTPUT-'].update(list(recipes_dict.keys()))
+        if event == 'Open Recipe Link':
+            #get_url(id) Todo
 
 ingredients = input('What are the ingredients youd like to use?')
 response = api.search_recipes_by_ingredients(ingredients, ranking=2)
