@@ -28,7 +28,6 @@ def main_window():
     #Intialize ingredients list
     ingredients = []
 
-    #Main window loop
     while True:
         event, values = window.read()
         if event == sg.WIN_CLOSED or event == 'Cancel':
