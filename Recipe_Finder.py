@@ -42,28 +42,6 @@ def main_loop():
             chosen = values['-OUTPUT-'][0]
             chosen_id = recipes_dict[chosen]
             recipe_link(chosen_id)
-"""
-# Import csv with all API ingredients for error message --------------------------
-from csv import reader
-
-with open('top-1k-ingredients.csv', 'r') as read_obj:
-    csv_reader = reader(read_obj)
-    List_Ingredients = list(csv_reader)
-    print(List_Ingredients)
-
-# error message -------------------------------------------------------------------
-#TODO
-while True:
-    try:
-        sg.InputText() = List_Ingredients[sg.InputText()]
-        break
-    except ValueError:
-        print('Your input could not be recognized. Please check the spelling')
-        with open('top-1k-ingredients.csv', 'r') as read_obj:
-            csv_reader = reader(read_obj)
-            List_Ingredients = list(csv_reader)
-            #print(List_Ingredients)
-"""
 
 def find_recipes(ingredients):
     '''
