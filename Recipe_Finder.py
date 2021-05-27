@@ -11,22 +11,21 @@ layout_window = [
         [sg.InputText()],
         [sg.Button('Ok'), sg.Button('Cancel')],
         [sg.Listbox([],size = (60,20), auto_size_text=True, key='-OUTPUT-')],
-        [sg.Button('Find Recipes')]
+        [sg.Button('Open')]
         ]
 window = sg.Window('Recipe Finder', layout_window)
 
-def display_window():
+def main_loop():
     '''
-    This function will display a window in which the user specifies the ingredients they wish to find a recipe for.
+    This function takes the user input from the main window and creates the flow of the window in communication with other functions.
     In communication with the find_recipes function this function then outputs the top 10 options of recipes with
     the chosen ingredients. The user can then choose which one they would like to view.
-    When they choose a recipe and click 'ok' the link to that recipe will open in their browser.
+    When they choose a recipe and click 'ok' the link to that recipe will open in their browser, this is done in communication with
+    the recipe_link(id) function.
 
-    layout_window defines the layout of the main window.
-
-    ingredients = will be filled by the input text of the user
-    chosen = will be filled by the recipe choice the user makes
-    chosen_id = finds the ID associated with the chosen recipe in the API
+    ingredients = will be filled by the input text of the user.
+    chosen = will be filled by the recipe choice the user makes.
+    chosen_id = assigns the ID associated with the chosen recipe in the API.
 
     '''
 
@@ -39,7 +38,7 @@ def display_window():
             ingredients = values[0]
             recipes_dict = find_recipes(ingredients)
             window['-OUTPUT-'].update(list(recipes_dict.keys()))
-        if event == 'Find Recipes':
+        if event == 'Open':
             chosen = values['-OUTPUT-'][0]
             chosen_id = recipes_dict[chosen]
             recipe_link(chosen_id)
@@ -70,11 +69,10 @@ def find_recipes(ingredients):
     '''
     This function searches for recipes based on the input ingredients.
 
-    response = communicates with the API to search recipes by ingredients
-    recipe_name = will be filled based on the recipes found
-    recipe_id = will be filled based on the recipes found
+    response = communicates with the API to search recipes by ingredients.
+    recipe_name = will be filled based on the recipes found.
+    recipe_id = will be filled based on the recipes found.
     ranking = 1 defines the way the recipes are sorted (in this case by minimizing additional ingredients).
-
     '''
     response = api.search_recipes_by_ingredients(ingredients, ranking=1)
     api.search_recipes_by_ingredients(ingredients)
@@ -99,4 +97,4 @@ def recipe_link(id):
     wb.open((data['sourceUrl']))
     return data['sourceUrl']
 
-display_window()
+main_loop()
