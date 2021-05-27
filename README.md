@@ -1,7 +1,7 @@
 # Recipes Project
 
 ###Description:
-This software will help you try new recipes without having to go grocery shopping. 
+This program will help you try new recipes with the ingredients of your choice!
 List the ingredients that you'd like to use, and this program will show you all recipes
 from a database of 350.000 recipes that include those ingredients. If you list very few ingredients,
 the recipes shown may include some things you did not input. But the top recipes shown, 
